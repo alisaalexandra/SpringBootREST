@@ -1,0 +1,84 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+      <div class="form-group">
+        <!-- username -->
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" [(ngModel)]="user.username"
+                 class="form-control"
+                 id="username"
+                 name="username"
+                 placeholder="Enter your username"
+                 required #username="ngModel">
+        </div>
+
+        <!-- new password -->
+        <div class="form-group">
+          <label for="newPassword">Password</label>
+          <input type="password" [(ngModel)]="user.newPassword"
+                 class="form-control"
+                 id="newPassword"
+                 name="newPassword"
+                 placeholder="Enter your new password"
+                 #newPassword="ngModel"
+                 (keyup)="matchPasswords()">
+        </div>
+        <!-- confirm password -->
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" [(ngModel)]="confirmPassword"
+                 class="form-control"
+                 id="confirmPassword"
+                 name="confirmPassword"
+                 placeholder="Confirm your new password"
+                 #newPassword="ngModel"
+                 (keyup)="matchPasswords()">
+        </div>
+        <div *ngIf="!matched" class="alert alert-danger">Passwords don't match!</div>
+
+        <label for="name">Name</label>
+        <input type="text" [(ngModel)]="user.name"
+               class="form-control"
+               id="name"
+               name="name"
+               placeholder="Enter your name"
+               required #name="ngModel">
+      </div>
+      <div [hidden]="name.valid" class="alert alert-danger">Name is required</div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="text" [(ngModel)]="user.email"
+               class="form-control"
+               id="email"
+               name="email"
+               placeholder="Enter your email address"
+               required #email="ngModel">
+        <div [hidden]="email.valid" class="alert alert-danger">Email is required</div>
+      </div>
+      <div class="form-group">
+        <label for="userType">User type</label>
+        <select type="text" [(ngModel)]="user.userType"
+                class="form-control"
+                id="userType"
+                name="userType"
+                placeholder="Select user type"
+                required #userType="ngModel">
+          <option *ngFor="let ut of userTypes" [ngValue]="ut">{{ut.name}}
+          </option>
+        </select>
+      </div>
+      <div [hidden]="!userType.pristine" class="alert alert-danger">Type is required</div>
+
+      <div class="btn-group">
+        <button
+          class="btn btn-secondary mx-1">Back
+        </button>
+        <button type="submit" [disabled]="!userForm.form.valid"
+                class="btn btn-info">Submit
+        </button>
+
+      </div>
+    </form>
+  </div>
+</div>
